@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import useHandleNavigation from '../../routes/views/AuthRoutes';
+//imports routes
+import useHandleNavigation from '../../routes/authRoutes/AuthRoutes';
+import { handleLogin } from '../../routes/serverRoutes/userRegistrationRoute';
 
 const Login = () => {
   const handleNavigation = useHandleNavigation();
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [errorLogin, setErrorLogin] = useState(false);
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    console.log(`Username: ${username}, Password: ${password}, Mode: Login`);
-  };
-
+  const handleLoginOnPress = () => {
+    handleLogin(name, password, setErrorLogin, handleNavigation)
+  }
   return (
     <div
       className="min-h-screen flex items-center justify-center"
@@ -20,17 +21,16 @@ const Login = () => {
     >
       <div className="max-w-md w-full p-6 bg-white rounded-md shadow-md">
         <h2 className="text-3xl font-semibold mb-4 text-center">Login</h2>
-        <form onSubmit={handleFormSubmit}>
           <div className="mb-4">
             <label htmlFor="username" className="block text-sm font-medium text-gray-600">
               Username:
             </label>
             <input
               type="text"
-              id="username"
+              id="name"
               className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -45,15 +45,19 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          {errorLogin && 
+          <div className='text-center mb-1'>
+            <p className='text-red-500 font-bold'>Registration Error</p>
+          </div>
+          }
           <div className="mb-4">
             <button
               type="submit"
               className="bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 transition duration-300 ease-in-out w-full"
-            >
+              onClick={handleLoginOnPress}>
               Login
             </button>
           </div>
-        </form>
         <div className="text-center">
           <span className="text-gray-600">Don't have an account?</span>
           <button
