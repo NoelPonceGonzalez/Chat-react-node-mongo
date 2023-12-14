@@ -1,16 +1,14 @@
 import React from 'react';
 
 //imports
-import HeaderChat from '../../components/chat/headerChat';
-import SearchChat from '../../components/chat/searchChat';
-import ContactChat from '../../components/chat/contactChat';
+import SidebarChat from '../../components/shared/sidebarChat';
+import WindowChat from '../../components/chat/windowChat';
 
 const HomeUser = () => {
   return (
-    <div className='flex flex-col h-screen overflow-hidden'>
-      <HeaderChat />
-      <SearchChat />
-      <ContactChat />
+    <div className='flex flex-grow w-screen'>
+        <SidebarChat />
+        <WindowChat />
     </div>
   );
 };
