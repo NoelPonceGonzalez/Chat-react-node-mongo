@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 
+const config = require('../config');
+
 const databaseConnection = () => {
-    mongoose.connect('mongodb+srv://root:Noel1@chat-app.pc8xpry.mongodb.net/chat', {
+    mongoose.connect(config.MONGODB_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })

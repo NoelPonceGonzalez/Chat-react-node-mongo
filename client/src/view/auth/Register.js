@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 //imports routes
-import useHandleNavigation from '../../routes/authRoutes/AuthRoutes';
+import useHandleNavigation from '../../routes/navigationRoutes/navigationRoutes';
 import { handleRegister } from '../../routes/serverRoutes/userRegistrationRoute';
 
 const Register = () => {
