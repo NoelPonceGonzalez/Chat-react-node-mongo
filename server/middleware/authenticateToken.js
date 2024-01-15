@@ -1,9 +1,9 @@
-import jwt from 'jsonwebtoken';
-import User from '../database/schemas/userSchema';
+const jwt = require('jsonwebtoken');
+const User = require('../database/schemas/userSchema')
 
 const config = require('../config')
 
-export function authenticateToken(req, res, next) {
+function authenticateToken(req, res, next) {
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
@@ -23,7 +23,22 @@ export function authenticateToken(req, res, next) {
             return res.status(401).json({ success: false, message: 'Invalid token' });
         }
 
-        req.user = User;
+        req.decodedUser = decodedUser;
         next();
     });
-}
+};
+
+const verifyTokenMiddleware = (req, res, next) => {
+    try {
+      const decodedUser = req.decodedUser;
+  
+      // Puedes almacenar la información del usuario decodificado en la solicitud si es necesario
+      req.user = decodedUser;
+  
+      next(); // Pasa al siguiente middleware o ruta
+    } catch (error) {
+      res.status(401).json({ success: false, message: 'Token is invalid or expired' });
+    }
+  };
+
+module.exports = authenticateToken, verifyTokenMiddleware;
