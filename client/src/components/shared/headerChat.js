@@ -3,6 +3,8 @@ import { FaUserAlt, FaEllipsisV } from 'react-icons/fa';
 
 import { useTheme } from '../../theme/themeProvider';
 
+import closeSession from '../../routes/navigationRoutes/closeSession';
+
 const HeaderChat = () => {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -18,7 +20,7 @@ const HeaderChat = () => {
   };
 
   const handleLogout = () => {
-    console.log('Cerrar Sesión');
+    closeSession();
   };
 
   return (

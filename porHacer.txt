@@ -1,0 +1,6 @@
+añadir a un servidor
+cuando me entro a la ruta /chat como no he iniciado sesion que me heche o me devuelva a la ruta principal
+implementar la cookies con los tokens
+
+
+https://panel.000webhost.com/onboarding

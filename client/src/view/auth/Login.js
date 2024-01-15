@@ -12,6 +12,7 @@ const Login = () => {
   const handleLoginOnPress = () => {
     handleLogin(name, password, setErrorLogin, handleNavigation)
   }
+  
   return (
     <div
       className="min-h-screen flex items-center justify-center"
