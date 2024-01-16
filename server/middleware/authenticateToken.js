@@ -4,41 +4,20 @@ const User = require('../database/schemas/userSchema')
 const config = require('../config')
 
 function authenticateToken(req, res, next) {
-    const authHeader = req.headers.authorization;
+    const authToken = req.cookie.authToken;
 
-    if (!authHeader) {
-        return res.status(400).json({ success: false, message: 'Unauthorization token' });
-    }
+    if (!authToken) {
+      return res.status(400).json({ success: false, message: 'Unauthorized: Missing authentication cookie' });
+  }
 
-    const tokenParts = authHeader.split(' ');
+  jwt.verify(authToken, config.JWT_SECRET_KEY, (err, decodedUser) => {
+      if (err) {
+          return res.status(401).json({ success: false, message: 'Invalid or expired token' });
+      }
 
-    if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
-        return res.status(400).json({ success: false, message: 'Invalid authorization header format' });
-    }
-
-    const token = tokenParts[1];
-
-    jwt.verify(token, config.JWT_SECRET_KEY, (err, user) => {
-        if (err) {
-            return res.status(401).json({ success: false, message: 'Invalid token' });
-        }
-
-        req.decodedUser = decodedUser;
-        next();
-    });
+      req.decodedUser = decodedUser;
+      next();
+  });
 };
 
-const verifyTokenMiddleware = (req, res, next) => {
-    try {
-      const decodedUser = req.decodedUser;
-  
-      // Puedes almacenar la información del usuario decodificado en la solicitud si es necesario
-      req.user = decodedUser;
-  
-      next(); // Pasa al siguiente middleware o ruta
-    } catch (error) {
-      res.status(401).json({ success: false, message: 'Token is invalid or expired' });
-    }
-  };
-
-module.exports = authenticateToken, verifyTokenMiddleware;
+module.exports = authenticateToken;

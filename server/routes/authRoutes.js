@@ -64,7 +64,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/verify-token', (req, res) => {
+router.get('/verify-token', async (req, res) => {
     try {
         const decodedUser = req.decodedUser;
 
