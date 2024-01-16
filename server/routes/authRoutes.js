@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 
 const config = require('../config')
 const router = express.Router();
-const authenticateToken = require('../middleware/authenticateToken')
+const authenticateToken = require('../middleware/authenticateToken');
 
 router.post('/register', async (req, res) => {
     const {name, password, email} = req.body;
@@ -52,8 +52,8 @@ router.post('/login', async (req, res) => {
 
         if (isPasswordValid) {
             const token = jwt.sign({ user: user.name }, config.JWT_SECRET_KEY, { expiresIn: '1h' });
-            res.cookie('authToken', token, 'nombreDeTuCookie', 'valorDeLaCookie', { maxAge: 1000000, httpOnly: true });
-            
+            res.cookie('authToken', token, { maxAge: 1000000, httpOnly: true });
+
             return res.json({ success: true, message: 'Login successful', user: user, token: token });
         } else {
             return res.status(401).json({ success: false, message: 'Invalid credentials' });
@@ -64,19 +64,21 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/verify-token', async (req, res) => {
+router.get('/verify-token', authenticateToken, async (req, res) => {
     try {
         const decodedUser = req.decodedUser;
-
+        console.log(decodedUser)
         res.status(200).json({ success: true, message: 'Token is valid', user: decodedUser });
     }catch(error) {
         res.status(500).json({succes: false, message: 'Token does not exist'})
     }
 });
 
-router.post('/logout', (req ,res) => {
+router.post('/logout', async (req ,res) => {
+
+    console.log(req.cookies.authToken);
     res.clearCookie('authToken');
-    
+
     res.status(200).json({ success: true, message: 'Session closed successfully' });
 })
 

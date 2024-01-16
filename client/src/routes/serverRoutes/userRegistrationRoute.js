@@ -3,6 +3,8 @@ import axios from "axios";
 //import API-ROUTE
 import { API_ROUTE } from "../API/config";
 
+axios.defaults.withCredentials = true;
+
 export const handleRegister = async (name, password, email, setErrorRegister, handleNavigation) => {
     try {
         const response = await axios.post(`${API_ROUTE}/register`, {
@@ -22,7 +24,7 @@ export const handleRegister = async (name, password, email, setErrorRegister, ha
     }
 };
 
-export const handleLogin = async (name, password, setErrorLogin, handleNavigation) => {
+export const handleLogin = async (name, password, setErrorLogin, setIsAuthenticated) => {
     try {
         const response = await axios.post(`${API_ROUTE}/login`, {
             name: name,
@@ -32,8 +34,8 @@ export const handleLogin = async (name, password, setErrorLogin, handleNavigatio
         const { success, token } = response.data;
 
         if (success && token) {
-            console.log(token)
-            handleNavigation('home')
+            console.log(response.data);
+            setIsAuthenticated(true);
         } else {
             setErrorLogin(true);
         }

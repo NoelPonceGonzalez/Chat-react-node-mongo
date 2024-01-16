@@ -3,21 +3,21 @@ const User = require('../database/schemas/userSchema')
 
 const config = require('../config')
 
-function authenticateToken(req, res, next) {
-    const authToken = req.cookie.authToken;
+const authenticateToken = (req, res, next) => {
+  const token = req.cookies.authToken;
 
-    if (!authToken) {
-      return res.status(400).json({ success: false, message: 'Unauthorized: Missing authentication cookie' });
+  console.log(token)
+  if (!token) {
+    return res.status(401).json({ success: false, message: 'Token not provided' });
   }
 
-  jwt.verify(authToken, config.JWT_SECRET_KEY, (err, decodedUser) => {
-      if (err) {
-          return res.status(401).json({ success: false, message: 'Invalid or expired token' });
-      }
-
-      req.decodedUser = decodedUser;
-      next();
-  });
+  try {
+    const decodedUser = jwt.verify(token, config.JWT_SECRET_KEY);
+    req.decodedUser = decodedUser;
+    next(); // ¡Asegúrate de agregar esta línea para pasar al siguiente middleware!
+  } catch (error) {
+    return res.status(403).json({ success: false, message: 'Invalid token' });
+  }
 };
 
 module.exports = authenticateToken;

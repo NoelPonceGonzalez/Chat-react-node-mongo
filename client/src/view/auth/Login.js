@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
 //imports routes
-import useHandleNavigation from '../../routes/navigationRoutes/navigationRoutes';
 import { handleLogin } from '../../routes/serverRoutes/userRegistrationRoute';
+import useHandleNavigation from '../../routes/navigationRoutes/navigationRoutes';
+import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
   const handleNavigation = useHandleNavigation();
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [errorLogin, setErrorLogin] = useState(false);
+  const { setIsAuthenticated } = useAuth();
 
-  const handleLoginOnPress = () => {
-    handleLogin(name, password, setErrorLogin, handleNavigation)
-  }
+  const handleLoginOnPress = async () => {
+    try {
+      await handleLogin(name, password, setErrorLogin, setIsAuthenticated);
+      handleNavigation('home'); // Redirige a /home después del inicio de sesión exitoso
+    } catch (error) {
+      console.error('Error during login:', error);
+      setIsAuthenticated(false);
+    }
+  };
   
   return (
     <div
