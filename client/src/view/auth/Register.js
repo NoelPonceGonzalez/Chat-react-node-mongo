@@ -10,10 +10,6 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [errorRegister, setErrorRegister] = useState(false);
 
-  const handleRegisterPress = async () => {
-    await handleRegister(name, password, email, setErrorRegister, handleNavigation);
-  }
-
   return (
     <div
       className="min-h-screen flex items-center justify-center"
@@ -68,7 +64,7 @@ const Register = () => {
             <button
               type="submit"
               className="bg-green-500 text-white p-3 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-green-300 transition duration-300 ease-in-out w-full"
-              onClick={handleRegisterPress}>
+              onClick={() => handleRegister(name, password, email, setErrorRegister, handleNavigation)}>
               Register
             </button>
           </div>

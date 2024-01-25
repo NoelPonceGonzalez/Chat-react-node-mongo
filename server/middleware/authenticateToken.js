@@ -4,7 +4,7 @@ const User = require('../database/schemas/userSchema')
 const config = require('../config')
 
 const authenticateToken = (req, res, next) => {
-  const token = req.cookies.authToken;
+  const token = req.cookies.tokenCookie;
 
   console.log(token)
   if (!token) {
@@ -14,7 +14,7 @@ const authenticateToken = (req, res, next) => {
   try {
     const decodedUser = jwt.verify(token, config.JWT_SECRET_KEY);
     req.decodedUser = decodedUser;
-    next(); // ¡Asegúrate de agregar esta línea para pasar al siguiente middleware!
+    next(); 
   } catch (error) {
     return res.status(403).json({ success: false, message: 'Invalid token' });
   }

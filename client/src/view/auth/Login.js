@@ -14,7 +14,7 @@ const Login = () => {
   const handleLoginOnPress = async () => {
     try {
       await handleLogin(name, password, setErrorLogin, setIsAuthenticated);
-      handleNavigation('home'); // Redirige a /home después del inicio de sesión exitoso
+      handleNavigation('home');
     } catch (error) {
       console.error('Error during login:', error);
       setIsAuthenticated(false);
@@ -71,7 +71,7 @@ const Login = () => {
           <span className="text-gray-600">Don't have an account?</span>
           <button
             onClick={() => handleNavigation('register')}
-            className="text-blue-500 ml-1 hover:underline focus:outline-none"
+            className="text-blue-500 ml-1 hoºver:underline focus:outline-none"
           >
             Register here
           </button>

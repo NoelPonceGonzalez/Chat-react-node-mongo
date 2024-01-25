@@ -8,6 +8,9 @@ const config = require('../config')
 const router = express.Router();
 const authenticateToken = require('../middleware/authenticateToken');
 
+router.use(cookieParser());
+
+
 router.post('/register', async (req, res) => {
     const {name, password, email} = req.body;
 
@@ -27,6 +30,7 @@ router.post('/register', async (req, res) => {
             name: name,
             password: hashedPassword,
             email: email,
+            friend: []
         });
 
         await newUser.save();
@@ -52,8 +56,9 @@ router.post('/login', async (req, res) => {
 
         if (isPasswordValid) {
             const token = jwt.sign({ user: user.name }, config.JWT_SECRET_KEY, { expiresIn: '1h' });
-            res.cookie('authToken', token, { maxAge: 1000000, httpOnly: true });
-
+            res.header('Access-Control-Allow-Credentials', true)
+            res.cookie('tokenCookie', token, { maxAge: 1000 * 60 * 40, httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict'});
+            console.log(req.cookies.tokenCookie)
             return res.json({ success: true, message: 'Login successful', user: user, token: token });
         } else {
             return res.status(401).json({ success: false, message: 'Invalid credentials' });

@@ -3,8 +3,6 @@ import axios from "axios";
 //import API-ROUTE
 import { API_ROUTE } from "../API/config";
 
-axios.defaults.withCredentials = true;
-
 export const handleRegister = async (name, password, email, setErrorRegister, handleNavigation) => {
     try {
         const response = await axios.post(`${API_ROUTE}/register`, {
@@ -29,13 +27,18 @@ export const handleLogin = async (name, password, setErrorLogin, setIsAuthentica
         const response = await axios.post(`${API_ROUTE}/login`, {
             name: name,
             password: password,
-        });
+        },
+            {
+                withCredentials: true,
+            }
+        );
 
         const { success, token } = response.data;
 
         if (success && token) {
             console.log(response.data);
             setIsAuthenticated(true);
+            console.log(document.cookie)
         } else {
             setErrorLogin(true);
         }
@@ -45,19 +48,3 @@ export const handleLogin = async (name, password, setErrorLogin, setIsAuthentica
     }
 };
 
-export const verifyToken = async (setIsAuthenticated) => {
-    try {
-        const response = await axios.get(`${API_ROUTE}/verify-token`);
-
-        const { success } = response.data;
-
-        if (success) {
-            setIsAuthenticated(true);
-        } else {
-            setIsAuthenticated(false);
-        }
-    } catch (error) {
-        console.error('Error during verifying token:', error);
-        setIsAuthenticated(false);
-    }
-}
