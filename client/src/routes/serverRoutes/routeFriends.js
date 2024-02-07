@@ -1,6 +1,7 @@
 import axios from "axios"
 import { API_ROUTE } from "../API/config"
 
+axios.defaults.withCredentials = true;
 
 export const addFriends = async (newFriend) => {
     try {
@@ -16,4 +17,4 @@ export const addFriends = async (newFriend) => {
     } catch (error) {
         console.log("Error en la ruta addFriend", error);
     }
-}
+} 

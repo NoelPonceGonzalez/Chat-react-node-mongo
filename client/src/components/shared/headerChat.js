@@ -3,8 +3,8 @@ import { FaUserAlt, FaEllipsisV } from 'react-icons/fa';
 
 import { useTheme } from '../../theme/themeProvider';
 
-import ConfigMenu from '../menu/configMenu';
-import FriendMenu from '../menu/friendMenu';
+import ConfigMenu from '../desplegables/ConfigMenu';
+import FriendMenu from '../desplegables/friendMenu';
 
 const HeaderChat = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);

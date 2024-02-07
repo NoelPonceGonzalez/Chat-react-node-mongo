@@ -2,19 +2,20 @@ import axios from "axios";
 
 import { API_ROUTE } from "../API/config";
 
-const closeSession = async () => {
+axios.defaults.withCredentials = true;
+
+const closeSession = async (setIsAuthenticated) => {
     try {
-        const response = await axios.post(`${API_ROUTE}/logout`);
+      const response = await axios.get(`${API_ROUTE}/logout`);
+      const success = response.data.success;
 
-        const succes = response.data;
-    
-        if(succes) {
-            console.log(response.data)
-        }
-    }catch(error){
-        console.log('adsas', error)
+      if(success) {
+        setIsAuthenticated(true)
+      }
+    } catch (error) {
+      console.log('Error closing session:', error);
+      return false;
     }
-
-};
+  };
   
 export default closeSession;

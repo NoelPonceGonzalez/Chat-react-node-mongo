@@ -1,0 +1,37 @@
+2024-01-26 18:57:59 [INFO]: User logged in: noel
+2024-01-26 18:58:11 [INFO]: Invalid credentials for user: admin@gmail.com
+2024-01-26 18:58:16 [INFO]: User logged in: admin
+2024-01-26 19:00:26 [ERROR]: Invalid password for user: admin
+2024-01-26 19:00:32 [INFO]: User logged in: admin
+2024-01-26 19:04:42 [INFO]: User logged in: noel
+2024-01-26 19:05:07 [INFO]: User logged in: noel
+2024-01-26 19:05:22 [INFO]: User logged in: noel
+2024-01-26 19:06:19 [INFO]: User logged in: noel
+2024-01-26 19:07:13 [INFO]: User logged in: admin
+2024-01-26 19:07:19 [INFO]: User logged in: admin
+2024-01-26 19:07:19 [ERROR]: Error finding user: 
+2024-01-26 19:07:23 [INFO]: User logged in: noel
+2024-01-26 19:07:31 [INFO]: User logged in: noel
+2024-01-26 19:08:00 [INFO]: User logged in: noel
+2024-01-26 19:08:46 [INFO]: User logged in: noel
+2024-01-26 19:08:57 [INFO]: User logged in: noel
+2024-01-26 19:10:08 [INFO]: User logged in: noel
+2024-01-26 19:11:01 [INFO]: User logged in: admin
+2024-01-26 19:11:49 [INFO]: User logged in: admin
+2024-01-26 19:13:41 [INFO]: User logged in: noel
+2024-01-26 19:14:02 [INFO]: User logged in: noel
+2024-01-26 19:14:58 [INFO]: User logged in: noel
+2024-01-26 19:15:04 [INFO]: User logged in: noel
+2024-01-26 19:15:10 [INFO]: User logged in: noel
+2024-01-26 19:16:31 [INFO]: User logged in: noel
+2024-01-26 19:16:40 [ERROR]: Error finding user: 
+2024-01-26 19:16:46 [INFO]: User logged in: noel
+2024-01-26 19:18:08 [INFO]: User logged in: noel
+2024-01-26 19:18:17 [INFO]: User logged in: noel
+2024-01-26 19:19:20 [INFO]: User logged in: noel
+2024-01-26 19:20:16 [INFO]: User logged in: noel
+2024-01-26 19:20:17 [ERROR]: Error finding user: 
+2024-01-26 19:24:56 [INFO]: User logged in: noel
+2024-01-26 19:26:29 [INFO]: User logged in: noel
+2024-01-26 19:29:21 [INFO]: User logged in: noel
+2024-01-30 17:04:19 [INFO]: User logged in: noel
